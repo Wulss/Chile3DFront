@@ -9,12 +9,12 @@ import OlSourceOSM from "ol/source/osm";
 import OlDraw from "ol/interaction/draw";
 import OlSourceVector from "ol/source/vector";
 import OlLayerVector from "ol/layer/vector";
-import OlStyle from "ol/style";
+
 import OlProj from "ol/proj";
 import { useEffect } from "react";
-import JSZip from "jszip";
+
 import { saveAs } from 'file-saver';
-import axios from "axios";
+
 
 
 export function SearchMap() {
@@ -100,7 +100,7 @@ class Map extends Component {
       
       var makeRequest = function () {
         fetch(
-          "http://127.0.0.1:8000/geojson  ",
+          "http://127.0.0.1:8000/geojson",
           {
             method: "POST",
             headers: {
