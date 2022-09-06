@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Button from '@mui/material/Button';
 import { ReactDOM } from "react";
 import PropTypes from "prop-types";
 import OlMap from "ol/map";
@@ -158,8 +158,10 @@ class Map extends Component {
   render() {
     return (
       <div id="map" style={{ width: "100%", height: "60vh" }}>
-        <button onClick={(e) => this.userAction()}>goto Chile</button>
-        <button onClick={(e) => this.draw()}>Draw</button>
+        <Button variant="outlined" sx={{margin:1}} 
+        onClick={(e) => this.userAction()}>goto Chile</Button>
+        <Button variant="outlined" onClick={(e) => this.draw()}>Draw</Button>
+
       </div>
     );
   }

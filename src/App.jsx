@@ -1,11 +1,12 @@
+import {ButtonAppBar} from './components/Navbar/Navbar';
 import { SearchMap } from "./components/SearchMap/SearchMap";
+import "./style.css";
 
 export function App() {
   return (
     <div className='App'>
-      <h2>Map</h2>
+      <ButtonAppBar />
       <SearchMap />
           </div>
   );
 }
-//[-8000000, -4000000]
