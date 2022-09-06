@@ -12,6 +12,9 @@ import OlLayerVector from "ol/layer/vector";
 import OlStyle from "ol/style";
 import OlProj from "ol/proj";
 import { useEffect } from "react";
+import JSZip from "jszip";
+import { saveAs } from 'file-saver';
+import axios from "axios";
 
 
 export function SearchMap() {
@@ -110,21 +113,22 @@ class Map extends Component {
           if (response.ok) {
             response.json().then((json) => {
               console.log(json);
-              var archive = String(json["inside"][0]);
-              console.log(archive);
+              var archive = json["inside"];
+              
 
               var archivo = {
-                files: [archive],
+                files: archive,
               };
               var data = JSON.stringify(archivo);
               console.log(data);
+              
               var downloadData = function () {
                 fetch(
                   "http://127.0.0.1:8000/files",
                   {
                     method: "POST",
                     headers: {
-                      "Content-Type": "application/json",
+                      "Content-Type": "application/x-zip-compressed",
                       "Access-Control-Allow-Origin": "*",
                       "Accept": "*/*",
                       "Accept-Encoding": "gzip, deflate, br",
@@ -134,16 +138,9 @@ class Map extends Component {
                       data
                   ,
                   }
-                ).then((response) => {
-                  console.log("tengo respuestsa");
-                  if(response.ok) {
-                   response.json().then((json) => {
-                      console.log("respuesta ok");
-                    
-                      console.log(json);
-                   })
-                  }
-                });
+                ).then(response => response.blob())
+                .then(result => saveAs(result, "files.zip"))
+                .catch(error => console.log('error', error));
               }
               downloadData();
             });
@@ -151,6 +148,7 @@ class Map extends Component {
         });
       };
       makeRequest();
+      
 
       
       console.log(geojson);
