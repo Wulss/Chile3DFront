@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
+
 import { ReactDOM } from "react";
 import PropTypes from "prop-types";
 import OlMap from "ol/map";
@@ -12,11 +12,12 @@ import OlLayerVector from "ol/layer/vector";
 import OlStyle from "ol/style";
 import OlProj from "ol/proj";
 import { useEffect } from "react";
-import { List } from "@material-ui/icons";
+
 
 export function SearchMap() {
   return <Map></Map>;
 }
+var url = "http://127.0.0.1:8000"
 
 class Map extends Component {
   constructor(props) {
@@ -96,7 +97,7 @@ class Map extends Component {
       
       var makeRequest = function () {
         fetch(
-          "https://6a23-2800-150-14b-227c-a88b-77cd-6ff4-d847.ngrok.io/geojson  ",
+          "http://127.0.0.1:8000/geojson  ",
           {
             method: "POST",
             headers: {
@@ -119,7 +120,7 @@ class Map extends Component {
               console.log(data);
               var downloadData = function () {
                 fetch(
-                  "https://6a23-2800-150-14b-227c-a88b-77cd-6ff4-d847.ngrok.io/files",
+                  "http://127.0.0.1:8000/files",
                   {
                     method: "POST",
                     headers: {
@@ -129,9 +130,9 @@ class Map extends Component {
                       "Accept-Encoding": "gzip, deflate, br",
                       "Connection": "keep-alive",
                     }, 
-                    body: {
+                    body: 
                       data
-                  },
+                  ,
                   }
                 ).then((response) => {
                   console.log("tengo respuestsa");
